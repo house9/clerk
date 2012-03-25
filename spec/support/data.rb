@@ -1,0 +1,1 @@
+Post.create!(:title => "TEST POST")

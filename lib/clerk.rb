@@ -1,3 +1,5 @@
+require 'active_record'
+
 require "clerk/version"
 
 module Clerk
