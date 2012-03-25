@@ -55,7 +55,7 @@ Step 3: Add the `track_who_does_it` macro to any ActiveRecord models that have `
       track_who_does_it
     end
     
-We probably want our User model to be `track_who_does_it` as well
+We probably want our User model to `track_who_does_it` as well
 
     class User < ActiveRecord::Base
       include SentientUser
