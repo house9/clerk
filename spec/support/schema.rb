@@ -8,4 +8,11 @@ ActiveRecord::Schema.define do
     t.integer :updated_by_id
     t.timestamps
   end
+  
+  create_table :users, :force => true do |t|
+    t.string :name
+    t.integer :created_by_id
+    t.integer :updated_by_id
+    t.timestamps
+  end  
 end
