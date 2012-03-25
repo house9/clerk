@@ -5,7 +5,7 @@ describe Clerk do
     Clerk::VERSION.length.should > 0
   end
 
-  it "should make is_clerical available" do
+  it "should expose is_clerical" do
     Post.extend Clerk
     Post.should respond_to :is_clerical
   end
@@ -17,15 +17,46 @@ describe Clerk do
       is_clerical
     end
         
-    it "should have creator" do
+    it "should respond to creator" do
       post = PostExtended.new
       post.should respond_to :creator
     end
     
-    it "should have updater" do
+    it "should respond to updater" do
       post = PostExtended.new
       post.should respond_to :updater
     end    
   end
   
+  describe "clerical objects can be tracked automatically" do
+    Post.extend Clerk
+    
+    class PostExtended < Post
+      is_clerical
+    end    
+    
+    before(:each) do
+      @creator = User.create!(:name => "creator")
+      @updater = User.create!(:name => "updater")
+    end
+    
+    it "by creator" do
+      @creator.make_current
+      this = PostExtended.new(:title => "Test")
+      this.save
+      this.creator.name.should == "creator"
+      this.updater.name.should == "creator"
+    end
+
+    it "by updater" do
+      @creator.make_current
+      this = PostExtended.new(:title => "Test2")
+      this.save
+      
+      @updater.make_current
+      this.update_attribute(:title, "Updated")
+      this.creator.name.should == "creator"
+      this.updater.name.should == "updater"      
+    end
+  end  
 end
