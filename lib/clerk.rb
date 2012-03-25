@@ -2,6 +2,7 @@ require 'active_record'
 require 'sentient_user'
 require 'clerk/version'
 require 'clerk/callback'
+require 'clerk/railtie'
 
 module Clerk
   def is_clerical
