@@ -5,16 +5,16 @@ describe Clerk do
     Clerk::VERSION.length.should > 0
   end
 
-  it "should expose is_clerical" do
+  it "should expose track_who_does_it" do
     Post.extend Clerk
-    Post.should respond_to :is_clerical
+    Post.should respond_to :track_who_does_it
   end
   
   describe "extended objects" do
     Post.extend Clerk
     
     class PostExtended < Post
-      is_clerical
+      track_who_does_it
     end
         
     it "should respond to creator" do
@@ -32,8 +32,8 @@ describe Clerk do
     Post.extend Clerk
     
     class PostExtended < Post
-      is_clerical
-    end    
+      track_who_does_it
+    end
     
     before(:each) do
       @creator = User.create!(:name => "creator")

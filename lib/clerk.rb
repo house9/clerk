@@ -5,7 +5,7 @@ require 'clerk/callback'
 require 'clerk/railtie'
 
 module Clerk
-  def is_clerical
+  def track_who_does_it
     before_create Clerk::Callback.new
     before_update Clerk::Callback.new
 

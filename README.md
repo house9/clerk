@@ -34,32 +34,32 @@ Then follow the directions under Setup
 
 ## Setup
 
-Step 1: include the `sentient_user` module on your User `/app/models/user.rb`
+Step 1: include the `sentient_user` SentientUser module on your User `/app/models/user.rb`
 
     class User < ActiveRecord::Base
       include SentientUser
-    end
+    endis
     
-Step 2: include the `sentient_user` module on your ApplicationController `/app/controllers/application_controller.rb`
+Step 2: include the `sentient_user` SentientController module on your ApplicationController `/app/controllers/application_controller.rb`
     
     class ApplicationController < ActionController::Base
       protect_from_forgery
-      include SentientUser
+      include SentientController
       
       # ...
     end    
     
-Step 3: Add the `is_clerical` macro to any ActiveRecord models that have `created_by_id` and `updated_by_id` database columns
+Step 3: Add the `track_who_does_it` macro to any ActiveRecord models that have `created_by_id` and `updated_by_id` database columns
     
     class Post < ActiveRecord::Base
-      is_clerical
+      track_who_does_it
     end
     
-We probably want our User model to be `is_clerical` as well
+We probably want our User model to be `track_who_does_it` as well
 
     class User < ActiveRecord::Base
       include SentientUser
-      is_clerical
+      track_who_does_it
     end
 
 ## Usage 
@@ -74,7 +74,7 @@ Since your models have the creator and updater attributes you can display these 
 Since we are using `sentient_user` you can also set the updater or creator in tests or rake tasks
 
     user = User.find(5150)
-    user.make_current # now all models marked as is_clerical will save with this user tracked
+    user.make_current # now all models marked as track_who_does_it will save with this user tracked
     Post.create!(:title => "New Post")
     Post.last.creator == user # => true
 

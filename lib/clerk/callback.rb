@@ -12,7 +12,7 @@ module Clerk
     # relies on `include SentientUser` on User
     def current_user
       logger.warn "WARNING: User#current is not defined, are you including SentientUser on your User model?" unless User.respond_to?(:current)
-      logger.warn "WARNING: User#current is nil, are you including SentientUser on your ApplicationController?" unless User.current
+      logger.warn "WARNING: User#current is nil, are you including SentientController on your ApplicationController?" unless User.current
 
       User.current
     end  
