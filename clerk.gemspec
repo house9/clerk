@@ -2,13 +2,16 @@
 require File.expand_path('../lib/clerk/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Jesse House"]
-  gem.email         = ["jesse.house@gmail.com"]
-  gem.description   = File.open('README.md') { |f| f.read }
-  gem.summary       = %q{
+  
+  summary = %q{
     For Rails applications - add creator and updater to your ActiveRecord models 
     and automatically set these from current_user
   }
+  
+  gem.authors       = ["Jesse House"]
+  gem.email         = ["jesse.house@gmail.com"]
+  gem.description   = "#{summary}\nSee the README on github for more info"
+  gem.summary       = summary
   gem.homepage      = "https://github.com/house9/clerk"
 
   gem.files         = `git ls-files`.split($\)
