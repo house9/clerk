@@ -1,11 +1,13 @@
 # Clerk
 
+[![Build Status](https://travis-ci.org/house9/clerk.png)](https://travis-ci.org/house9/clerk.png)
+
 Clerk adds the following attributes to your ActiveRecord objects
 
 * creator
 * updater
 
-Used in conjunction with the [`sentient_user`](https://github.com/bokmann/sentient_user) gem, 
+Used in conjunction with the [`sentient_user`](https://github.com/bokmann/sentient_user) gem,
 Clerk will automatically update these attributes using `before_create` and `before_update`
 ActiveRecord callback methods
 
@@ -29,7 +31,7 @@ And then execute:
 Or install it yourself as:
 
     $ gem install clerk
-    
+
 Then follow the directions under Setup
 
 ## Setup
@@ -39,22 +41,22 @@ Step 1: include the `sentient_user` SentientUser module on your User `/app/model
     class User < ActiveRecord::Base
       include SentientUser
     endis
-    
+
 Step 2: include the `sentient_user` SentientController module on your ApplicationController `/app/controllers/application_controller.rb`
-    
+
     class ApplicationController < ActionController::Base
       protect_from_forgery
       include SentientController
-      
+
       # ...
-    end    
-    
+    end
+
 Step 3: Add the `track_who_does_it` macro to any ActiveRecord models that have `created_by_id` and `updated_by_id` database columns
-    
+
     class Post < ActiveRecord::Base
       track_who_does_it
     end
-    
+
 We probably want our User model to `track_who_does_it` as well
 
     class User < ActiveRecord::Base
@@ -62,15 +64,15 @@ We probably want our User model to `track_who_does_it` as well
       track_who_does_it
     end
 
-## Usage 
+## Usage
 
-Once you have finished the Setup and restarted your rails server 
+Once you have finished the Setup and restarted your rails server
 your models should automatically update the creator and the updater attributes after being saved.
 
 Since your models have the creator and updater attributes you can display these in any views
 
     Updated by <%= @post.updater.full_name %> at <%= l(@post.updated_at, :format => :long) %>
-    
+
 Since we are using `sentient_user` you can also set the updater or creator in tests or rake tasks
 
     user = User.find(5150)
