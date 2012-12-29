@@ -15,8 +15,8 @@ The gem assumes the following:
 
 * you have a User model
 * you have a `current_user` method on your ApplicationController
-* you are using columns named `created_by_id` and `updated_by_id` on your database tables
-* these columns are foreign keys to users.id
+* you have 2 columns which are foreign keys of users.id
+  * the gems uses the following as defaults `created_by_id` and `updated_by_id`
 
 ## Installation
 
@@ -62,6 +62,12 @@ We probably want our User model to `track_who_does_it` as well
     class User < ActiveRecord::Base
       include SentientUser
       track_who_does_it
+    end
+
+You can optionally override the default column names `created_by_id` and `updated_by_id`
+
+    class Post < ActiveRecord::Base
+      track_who_does_it :creator_foreign_key => "user_id", :updater_foreign_key => "updater_id"
     end
 
 ## Usage

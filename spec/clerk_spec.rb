@@ -9,37 +9,37 @@ describe Clerk do
     Post.extend Clerk
     Post.should respond_to :track_who_does_it
   end
-  
+
   describe "extended objects" do
     Post.extend Clerk
-    
+
     class PostExtended < Post
       track_who_does_it
     end
-        
+
     it "should respond to creator" do
       post = PostExtended.new
       post.should respond_to :creator
     end
-    
+
     it "should respond to updater" do
       post = PostExtended.new
       post.should respond_to :updater
-    end    
+    end
   end
-  
+
   describe "clerical objects can be tracked automatically" do
     Post.extend Clerk
-    
+
     class PostExtended < Post
       track_who_does_it
     end
-    
+
     before(:each) do
       @creator = User.create!(:name => "creator")
       @updater = User.create!(:name => "updater")
     end
-    
+
     it "by creator" do
       @creator.make_current
       this = PostExtended.new(:title => "Test")
@@ -52,11 +52,28 @@ describe Clerk do
       @creator.make_current
       this = PostExtended.new(:title => "Test2")
       this.save
-      
+
       @updater.make_current
       this.update_attribute(:title, "Updated")
       this.creator.name.should == "creator"
-      this.updater.name.should == "updater"      
+      this.updater.name.should == "updater"
     end
-  end  
+  end
+
+  describe "specified foreign_keys" do
+    Foo.extend Clerk
+
+    class FooExtended < Foo
+      track_who_does_it :creator_foreign_key => "user_id", :updater_foreign_key => "updater_id"
+    end
+
+    it "can override default foreign_keys" do
+      creator = User.create!(:name => "creator")
+      creator.make_current
+      this = FooExtended.new(:bar => "Test")
+      this.save
+      this.creator.name.should == "creator"
+      this.updater.name.should == "creator"
+    end
+  end
 end
