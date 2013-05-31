@@ -22,9 +22,9 @@ Gem::Specification.new do |gem|
   gem.version       = Clerk::VERSION
 
   # gem.add_dependency 'rails', '~> 3'
-  gem.add_dependency 'activerecord', '~> 3'
-  gem.add_dependency 'railties', '~> 3'
-  gem.add_dependency 'sentient_user', '~> 0.3.2'
+  gem.add_dependency 'activerecord', '>= 3'
+  gem.add_dependency 'railties', '>= 3.1'
+  gem.add_dependency 'sentient_user', '>= 0.3.2'
 
 
   gem.add_development_dependency 'bundler', '>= 1.1.3'

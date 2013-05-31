@@ -34,6 +34,13 @@ Or install it yourself as:
 
 Then follow the directions under Setup
 
+### Rails 4
+
+if you are using rails 4 you will need to install from github, add the following to your Gemfile
+
+    gem 'sentient_user', git: "git://github.com/house9/sentient_user.git"
+    gem 'clerk', git: "git://github.com/house9/clerk.git"    
+
 ## Setup
 
 Step 1: include the `sentient_user` SentientUser module on your User `/app/models/user.rb`
