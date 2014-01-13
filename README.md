@@ -1,6 +1,6 @@
 # Clerk
 
-[![Build Status](https://travis-ci.org/house9/clerk.png)](https://travis-ci.org/house9/clerk) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/house9/clerk)
+[![Build Status](https://travis-ci.org/house9/clerk.png)](https://travis-ci.org/house9/clerk) [![Code Climate](https://codeclimate.com/github/house9/clerk.png)](https://codeclimate.com/github/house9/clerk)
 
 Clerk adds the following attributes to your ActiveRecord objects
 
@@ -33,13 +33,6 @@ Or install it yourself as:
     $ gem install clerk
 
 Then follow the directions under Setup
-
-### Rails 4
-
-if you are using rails 4 you will need to install from github, add the following to your Gemfile
-
-    gem 'sentient_user', git: "git://github.com/house9/sentient_user.git"
-    gem 'clerk', git: "git://github.com/house9/clerk.git"    
 
 ## Setup
 
