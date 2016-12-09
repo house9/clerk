@@ -77,6 +77,22 @@ describe Clerk do
     end
   end
 
+  describe "optional association in User itself creation" do
+    Post.extend Clerk
+
+    class PostExtended < Post
+      track_who_does_it
+    end
+
+    it "by creator" do
+      this = User.new(:name => "name")
+      this.save
+
+      this.created_by_id.should == nil
+      this.updated_by_id.should == nil
+    end
+  end
+
   describe "warning messages" do
     Post.extend Clerk
 

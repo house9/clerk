@@ -13,7 +13,7 @@ module Clerk
     creator_fk = options.fetch(:creator_foreign_key) { "created_by_id" }
     updater_fk = options.fetch(:updater_foreign_key) { "updated_by_id" }
 
-    belongs_to :creator, :class_name => "User", :foreign_key => creator_fk
-    belongs_to :updater, :class_name => "User", :foreign_key => updater_fk
+    belongs_to :creator, :class_name => "User", :foreign_key => creator_fk, :optional => true
+    belongs_to :updater, :class_name => "User", :foreign_key => updater_fk, :optional => true
   end
 end
