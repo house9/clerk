@@ -76,4 +76,69 @@ describe Clerk do
       this.updater.name.should == "creator"
     end
   end
+
+  describe "warning messages" do
+    Post.extend Clerk
+
+    class PostExtended < Post
+      track_who_does_it
+    end
+
+    before(:each) do
+      @logger = double("logger", warn: true)
+      Clerk.configure { |c| c.logger = @logger }
+    end
+
+    after(:each) do
+      # Reset configuration
+      Clerk.configuration = Clerk::Configuration.new
+    end
+
+    context "when missing SentientUser" do
+      before do
+        User.stub(:respond_to?).with(:current).and_return(false)
+      end
+      it "should log a message" do
+        @logger.should_receive(:warn).with("WARNING: User#current is not defined, are you including SentientUser on your User model?")
+        this = FooExtended.new(:bar => "Test")
+        this.save
+      end
+
+      context "amd warning are silenced" do
+        before do
+          Clerk.configure { |c| c.silence_warnings = true }
+        end
+
+        it "should not show a log message" do
+          @logger.should_not_receive(:warn).with("WARNING: User#current is not defined, are you including SentientUser on your User model?")
+          this = FooExtended.new(:bar => "Test")
+          this.save
+        end
+      end
+    end
+
+    context "when missing User.current" do
+      before do
+        User.current = nil
+      end
+
+      it "should log a message" do
+        @logger.should_receive(:warn).with("WARNING: User#current is nil, are you including SentientController on your ApplicationController?")
+        this = FooExtended.new(:bar => "Test")
+        this.save
+      end
+
+      context "amd warning are silenced" do
+        before do
+          Clerk.configure { |c| c.silence_warnings = true }
+        end
+
+        it "should not show a log message" do
+          @logger.should_not_receive(:warn).with("WARNING: User#current is nil, are you including SentientController on your ApplicationController?")
+          this = FooExtended.new(:bar => "Test")
+          this.save
+        end
+      end
+    end
+  end
 end
