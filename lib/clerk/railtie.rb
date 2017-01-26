@@ -8,6 +8,7 @@ module Clerk
 
       #initialize configuration object
       Clerk.configure do |config|
+        config.silence_warnings = Rails.env.test?
         config.logger = Rails.logger
       end
     end
