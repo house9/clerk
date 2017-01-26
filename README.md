@@ -34,6 +34,11 @@ Or install it yourself as:
 
 Then follow the directions under Setup
 
+### Version Notes
+
+* Use `0.2.x` for rails 4
+* Use `0.3.x` for rails 5
+
 ## Setup
 
 Step 1: include the `sentient_user` SentientUser module on your User `/app/models/user.rb`
