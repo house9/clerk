@@ -86,6 +86,18 @@ Since we are using `sentient_user` you can also set the updater or creator in te
     Post.create!(:title => "New Post")
     Post.last.creator == user # => true
 
+## Configuration
+
+In case you need to customize Clerk. Just create `config/initializers/clerk.rb` and set up your configuration:
+
+```ruby
+Clerk.configure do |config|
+  config.silence_warnings = true | false     # Defaults: false (true in test env)
+  config.logger = MyCustomLogger.new()       # Defaults: Rails.logger
+end
+```
+
+
 ## Resources used in the development of this gem
 
 * [http://ryanbigg.com/2011/01/extending-active-record/](http://ryanbigg.com/2011/01/extending-active-record/)
@@ -94,3 +106,4 @@ Since we are using `sentient_user` you can also set the updater or creator in te
 * [http://www.cowboycoded.com/2011/01/31/developing-is_able-or-acts_as-plugins-for-rails/](http://www.cowboycoded.com/2011/01/31/developing-is_able-or-acts_as-plugins-for-rails/)
 * [http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html](http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html)
 * [https://github.com/bokmann/sentient_user](https://github.com/bokmann/sentient_user)
+* [https://robots.thoughtbot.com/mygem-configure-block](https://robots.thoughtbot.com/mygem-configure-block)
