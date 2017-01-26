@@ -6,7 +6,6 @@ module Clerk
     initializer 'clerk.ar_extensions' do |app|
       ActiveRecord::Base.extend Clerk
 
-      #initialize configuration object
       Clerk.configure do |config|
         config.silence_warnings = Rails.env.test?
         config.logger = Rails.logger

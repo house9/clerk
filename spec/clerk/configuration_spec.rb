@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe Clerk::Configuration do
   before(:each) do
-    # Setups configuration
     Clerk.configure {}
   end
+
   after(:each) do
-    # Reset configuration
     Clerk.configuration = Clerk::Configuration.new
   end
+
   it "should have a configuration" do
     Clerk.configuration.should be_a(Clerk::Configuration)
   end

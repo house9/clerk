@@ -88,6 +88,7 @@ describe Clerk do
       @logger = double("logger", warn: true)
       Clerk.configure { |c| c.logger = @logger }
     end
+
     after(:each) do
       # Reset configuration
       Clerk.configuration = Clerk::Configuration.new
@@ -107,6 +108,7 @@ describe Clerk do
         before do
           Clerk.configure { |c| c.silence_warnings = true }
         end
+
         it "should not show a log message" do
           @logger.should_not_receive(:warn).with("WARNING: User#current is not defined, are you including SentientUser on your User model?")
           this = FooExtended.new(:bar => "Test")
@@ -138,6 +140,5 @@ describe Clerk do
         end
       end
     end
-
   end
 end
