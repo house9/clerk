@@ -24,7 +24,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'activerecord', '> 5'
   gem.add_dependency 'railties', '> 3.1'
-  gem.add_dependency 'sentient_user', '>= 0.4.0'
+  gem.add_dependency 'sentient_user_request_store', '>= 1.0.0'
 
 
   gem.add_development_dependency 'bundler', '>= 1.1.3'
